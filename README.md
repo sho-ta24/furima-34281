@@ -2,75 +2,83 @@
 
 ## users テーブル
 
-| Column             | Type   | Options  |
-| ------------------ | ------ | -------- |
-| nickname           | string | not null |
-| email              | string | not null |
-| password           | string | not null |
-| last_name          | string | not null |
-| first_name         | string | not null |
-| last_name_kana     | string | not null |
-| first_name_kana    | string | not null |
-| user_birth_date_1i | date   | not null |
-| user_birth_date_2i | date   | not null |
-| user_birth_date_3i | date   | not null |
+| Column             | Type   | Options    |
+| ------------------ | ------ | ---------- |
+| nickname           | string | null false |
+| email              | string | null false |
+| password           | string | null false |
+| last_name          | string | null false |
+| first_name         | string | null false |
+| last_name_kana     | string | null false |
+| first_name_kana    | string | null false |
+| birth_date         | date   | null false |
+
 
 ### Association
 
 - has_many :item
 - has_many :comments
+- has_many :managements
 
 ## items テーブル
 
-| Column                    | Type          | Options  |
-| ------------------------- | ------------- | -------- |
-| item_name                 | string        | not null |
-| item_info                 | text          | not null |
-| item_category             | string        | not null |
-| item_sales_status         | string        | not null |
-| item_shipping_free_status | string        | not null |
-| item_prefecture           | string        | not null |
-| item_scheduled_delivery   | date          | not null |
-| item_price                | integer       | not null |
-| item_image                | ActiveStorage |          |
-| user                      | references    |          |
+| Column                    | Type          | Options    |
+| ------------------------- | ------------- | ---------- |
+| name                 | string        | null false |
+| info                 | text          | null false |
+| category             | string        | null false |
+| sales_status         | string        | null false |
+| shipping_free_status | string        | null false |
+| prefecture           | integer       | null false |
+| scheduled_delivery   | date          | null false |
+| price                | integer       | null false |
+| image                | ActiveStorage |            |
+| user                      | references    |            |
 
 ### Association
 
 - belongs_to :user
 - has_many :comments
-- has_one  :buy
+- has_one  :management
 
 ## comments テーブル
 
-| Column     | Type          | Options  |
-| ---------- | ------------- | -------- |
-| text       | string        | not null |
-| user       | references    |          |
-| prototype  | references    |          |
+| Column     | Type          | Options    |
+| ---------- | ------------- | ---------- |
+| text       | string        | null false |
+| user       | references    |            |
+| prototype  | references    |            |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
 
-## buy テーブル
+## management テーブル
 
-| Column         | Type       | Options  |
-| -------------- | ---------- | -------- |
-| card_number    | integer    | not null |
-| card_exp_month | integer    | not null |
-| card_exp_year  | integer    | not null |
-| card_cvc       | integer    | not null |
-| postal_code    | string     | not null |
-| prefecture     | string     | not null |
-| city | date    | string     | not null |
-| addresses      | string     | not null |
-| building       | string     |          |
-| phone_number   | string     | not null |
-| item           | references |          |
+| Column         | Type       | Options    |
+| -------------- | ---------- | ---------- |
+| user           | references |            |
+| item           | references |            |
+| street address | references |            |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :street address
+
+
+## street address テーブル
+
+| Column         | Type       | Options    |
+| -------------- | ---------- | ---------- |
+| prefecture     | integer    | null false |
+| city           | string     | null false |
+| addresses      | string     | null false |
+| building       | string     |            |
+| phone_number   | string     | null false |
 
 
 ### Association
 
-- belongs_to :item
+- belongs_to :management
