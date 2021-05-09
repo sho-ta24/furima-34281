@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options    |
-| ------------------ | ------ | ---------- |
-| nickname           | string | null false |
-| email              | string | null false |
-| password           | string | null false |
-| last_name          | string | null false |
-| first_name         | string | null false |
-| last_name_kana     | string | null false |
-| first_name_kana    | string | null false |
-| birth_date         | date   | null false |
+| Column             | Type    | Options    |
+| ------------------ | ------- | ---------- |
+| nickname           | string  | null false |
+| email              | string  | null false |
+| password           | string  | null false |
+| last_name          | string  | null false |
+| first_name         | string  | null false |
+| last_name_kana     | string  | null false |
+| first_name_kana    | string  | null false |
+| birth_date_id      | integer | null false |
 
 
 ### Association
@@ -22,18 +22,17 @@
 
 ## items テーブル
 
-| Column                    | Type          | Options    |
-| ------------------------- | ------------- | ---------- |
-| name                 | string        | null false |
-| info                 | text          | null false |
-| category             | string        | null false |
-| sales_status         | string        | null false |
-| shipping_free_status | string        | null false |
-| prefecture           | integer       | null false |
-| scheduled_delivery   | date          | null false |
-| price                | integer       | null false |
-| image                | ActiveStorage |            |
-| user                      | references    |            |
+| Column                  | Type          | Options    |
+| ----------------------- | ------------- | ---------- |
+| name                    | string        | null false |
+| info                    | text          | null false |
+| category_id             | integer       | null false |
+| sales_status_id         | integer       | null false |
+| shipping_free_status_id | integer       | null false |
+| prefecture_id           | integer       | null false |
+| scheduled_delivery_id   | integer       | null false |
+| price                   | integer       | null false |
+| user                    | references    |            |
 
 ### Association
 
@@ -43,11 +42,11 @@
 
 ## comments テーブル
 
-| Column     | Type          | Options    |
-| ---------- | ------------- | ---------- |
-| text       | string        | null false |
-| user       | references    |            |
-| prototype  | references    |            |
+| Column       | Type          | Options    |
+| ------------ | ------------- | ---------- |
+| text         | string        | null false |
+| user         | references    |            |
+| item         | references    |            |
 
 ### Association
 
@@ -60,7 +59,7 @@
 | -------------- | ---------- | ---------- |
 | user           | references |            |
 | item           | references |            |
-| street address | references |            |
+| street_address | references |            |
 
 ### Association
 - belongs_to :user
@@ -70,13 +69,14 @@
 
 ## street address テーブル
 
-| Column         | Type       | Options    |
-| -------------- | ---------- | ---------- |
-| prefecture     | integer    | null false |
-| city           | string     | null false |
-| addresses      | string     | null false |
-| building       | string     |            |
-| phone_number   | string     | null false |
+| Column            | Type       | Options    |
+| ----------------- | ---------- | ---------- |
+| postal_code       | string     | null false |
+| prefecture_id     | integer    | null false |
+| city              | string     | null false |
+| addresses         | string     | null false |
+| building          | string     |            |
+| phone_number      | string     | null false |
 
 
 ### Association
