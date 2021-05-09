@@ -16,7 +16,7 @@
 
 ### Association
 
-- has_many :item
+- has_many :items
 - has_many :comments
 - has_many :managements
 
@@ -55,16 +55,17 @@
 
 ## management テーブル
 
-| Column         | Type       | Options           |
-| -------------- | ---------- | ----------------- |
-| user_id        | references | foreign_key: true |
-| item_id        | references | foreign_key: true |
+| Column      | Type       | Options           |
+| ----------- | ---------- | ----------------- |
+| user        | references | foreign_key: true |
+| item        | references | foreign_key: true |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
+- has_one :street address
 
-## street address テーブル
+## street_address テーブル
 
 | Column            | Type       | Options          |
 | ----------------- | ---------- | ---------------- |
