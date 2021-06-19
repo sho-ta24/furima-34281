@@ -66,13 +66,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
-      it 'category = 1だと登録できない' do
+      it 'category_id = 1だと登録できない' do
         @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
-      it 'prefecture = 1だと登録できない' do
+      it 'prefecture_id = 1だと登録できない' do
         @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
