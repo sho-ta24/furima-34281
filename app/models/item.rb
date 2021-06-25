@@ -17,8 +17,8 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   belongs_to :category
-  belongs_to :salesstatus
-  belongs_to :shippingfreestatus
+  belongs_to :sales_status
+  belongs_to :shipping_free_status
   belongs_to :prefecture
-  belongs_to :scheduleddelivery
+  belongs_to :scheduled_delivery
 end
