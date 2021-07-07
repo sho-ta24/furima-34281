@@ -63,14 +63,14 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :street address
+- has_one :street_address
 
 ## street_address テーブル
 
 | Column            | Type       | Options          |
 | ----------------- | ---------- | ---------------- |
 | postal_code       | string     | null false       |
-| prefecture_id     | integer    | null false       |
+| prefecture_       | integer    | null false       |
 | city              | string     | null false       |
 | addresses         | string     | null false       |
 | building          | string     |                  |
