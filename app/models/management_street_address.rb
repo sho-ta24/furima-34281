@@ -11,11 +11,12 @@ class ManagementStreetAddress < ApplicationRecord
     validates :user_id
   end
   validates :prefecture, numericality: {other_than: 1}
-
+  extend ActiveHash::Associations::ActiveRecordExtensions
   def save
+
     # 購入者情報を保存
-    order = Order.create(user_id: user_id, item_id: item_id)
+    management = Management.create(user_id: user_id, item_id: item_id)
     # 配送先住所の情報を保存
-    ShippingAddress.create(postal_code: postal_code, prefecture: prefecture, city: city, addresses: addresses, phone_num: phone_num, building: building, order_id: order.id)
+    StreetAddress.create(postal_code: postal_code, prefecture: prefecture, city: city, addresses: addresses, phone_num: phone_num, building: building, order_id: order.id)
   end
 end

@@ -7,7 +7,8 @@ class CreateStreetAddresses < ActiveRecord::Migration[6.0]
       t.string     :addresses,     null: false
       t.string     :building,      null: false
       t.string     :phone_number,  null: false
-      t.references :management,      null: false, foreign_key: true
+      
+      t.references :management,     foreign_key: true
       t.timestamps
     end
   end
