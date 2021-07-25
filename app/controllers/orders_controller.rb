@@ -3,7 +3,11 @@ class OrdersController < ApplicationController
   before_action :find_item, only: [:index, :create]
 
   def index
-    @management_street_address = ManagementStreetAddress.new
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    else
+      @management_street_address = ManagementStreetAddress.new
+    end
   end
 
   def create
