@@ -68,6 +68,11 @@ RSpec.describe ManagementStreetAddress, type: :model do
         @management_street_address.valid?
         expect(@management_street_address.errors.full_messages).to include("Item can't be blank")
       end
+      it "tokenが空では登録できないこと" do
+        @management_street_address.token = nil
+        @management_street_address.valid?
+        expect(@management_street_address.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
