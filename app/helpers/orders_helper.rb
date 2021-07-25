@@ -1,2 +1,2 @@
-module OdersHelper
+module OrdersHelper
 end

@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
   def create
     @management_street_address = ManagementStreetAddress.new(orders_params)
+    binding.pry
     if @management_street_address.valid?
       @management_street_address.save
       redirect_to root_path
