@@ -12,7 +12,9 @@ class OrdersController < ApplicationController
 
   def create
     @management_street_address = ManagementStreetAddress.new(orders_params)
-    unless @item.management.present?
+    if (current_user.id == @item.user_id) || @item.management.present?
+      render :index
+    else
       if @management_street_address.valid? 
         pay_item
         @management_street_address.save
@@ -20,8 +22,6 @@ class OrdersController < ApplicationController
       else
         render :index
       end
-    else
-    render :index
     end
   end
 
