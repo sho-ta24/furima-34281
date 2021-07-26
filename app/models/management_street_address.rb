@@ -5,7 +5,7 @@ class ManagementStreetAddress
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
     validates :city
-    validates :phone_number, format: { with: /\A[0-9]{11}\z/ }
+    validates :phone_number, format: { with: /\A[0-9]{10,11}\z/ }
     validates :address
     validates :item_id
     validates :user_id

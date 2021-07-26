@@ -12,12 +12,16 @@ class OrdersController < ApplicationController
 
   def create
     @management_street_address = ManagementStreetAddress.new(orders_params)
-    if @management_street_address.valid?
-      pay_item
-      @management_street_address.save
-      redirect_to root_path
+    unless @item.management.present?
+      if @management_street_address.valid? 
+        pay_item
+        @management_street_address.save
+        redirect_to root_path
+      else
+        render :index
+      end
     else
-      render :index
+    render :index
     end
   end
 
