@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe ManagementStreetAddress, type: :model do
   describe '購入情報の保存' do
     before do
-      @management_street_address = FactoryBot.build(:management_street_address)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @management_street_address = FactoryBot.build(:management_street_address, user_id: user.id, item_id: item.id)
+      sleep 0.1 
     end
 
     context '購入記録がで登録できる場合' do
@@ -11,7 +14,7 @@ RSpec.describe ManagementStreetAddress, type: :model do
         expect(@management_street_address).to be_valid
       end
       it '建物名が入力されていなくても保存できる' do
-        @management_street_address.building = nil
+        @management_street_address.building = ''
         @management_street_address.valid?
         expect(@management_street_address).to be_valid
       end
