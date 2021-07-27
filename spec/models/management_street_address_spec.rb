@@ -56,8 +56,18 @@ RSpec.describe ManagementStreetAddress, type: :model do
         @management_street_address.valid?
         expect(@management_street_address.errors.full_messages).to include('Phone number is invalid')
       end
-      it '電話番号が１１桁いないではないと保存できない' do
+      it '電話番号が英数字混合だと保存できない' do
+        @management_street_address.phone_number = '090g12ddfdf'
+        @management_street_address.valid?
+        expect(@management_street_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it '電話番号が12桁以上では保存できない' do
         @management_street_address.phone_number = '009012341234'
+        @management_street_address.valid?
+        expect(@management_street_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it '電話番号が９桁以内では保存できない' do
+        @management_street_address.phone_number = '009012341'
         @management_street_address.valid?
         expect(@management_street_address.errors.full_messages).to include('Phone number is invalid')
       end
