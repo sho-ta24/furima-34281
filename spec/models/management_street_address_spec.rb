@@ -15,7 +15,6 @@ RSpec.describe ManagementStreetAddress, type: :model do
       end
       it '建物名が入力されていなくても保存できる' do
         @management_street_address.building = ''
-        @management_street_address.valid?
         expect(@management_street_address).to be_valid
       end
     end
