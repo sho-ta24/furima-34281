@@ -1,27 +1,20 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_item, only: [:index, :create]
+  before_action :order_action, only: [:index, :create]
 
   def index
-    if (current_user.id == @item.user_id) || @item.management.present?
-      redirect_to root_path
-    else
-      @management_street_address = ManagementStreetAddress.new
-    end
+    @management_street_address = ManagementStreetAddress.new
   end
 
   def create
     @management_street_address = ManagementStreetAddress.new(orders_params)
-    if (current_user.id == @item.user_id) || @item.management.present?
-      render :index
+    if @management_street_address.valid? 
+      pay_item
+      @management_street_address.save
+      redirect_to root_path
     else
-      if @management_street_address.valid? 
-        pay_item
-        @management_street_address.save
-        redirect_to root_path
-      else
-        render :index
-      end
+      render :index
     end
   end
 
@@ -34,7 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def find_item
-    @item = Item.find_by(id: params[:item_id])
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
@@ -44,5 +37,9 @@ class OrdersController < ApplicationController
       card: orders_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def order_action
+    redirect_to root_path if (current_user.id == @item.user_id) || @item.management.present?
   end
 end
